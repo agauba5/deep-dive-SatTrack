@@ -1,8 +1,11 @@
 package edu.cnm.deepdive.ahg.sattrack;
 
-import android.app.Fragment;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,9 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener , HomeFragment.OnFragmentInteractionListener{
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +27,9 @@ public class MainActivity extends AppCompatActivity
     setContentView(R.layout.activity_main);
     Toolbar toolbar = setupToolbar();
     setupDrawer(toolbar);
-    Fragment searchResultsFragment = new Fragment();
+    HomeFragment homeFragment = new  HomeFragment();
+    FragmentTransaction home = getSupportFragmentManager().beginTransaction().add(R.id.content_main, homeFragment);
+    home.commit();
 
   }
 
@@ -79,16 +88,47 @@ public class MainActivity extends AppCompatActivity
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 
-    if (id == R.id.nav_saved) {
-      // Handle the camera action
+    displaySelectedScreen(id);
+    return true;
+  }
+  @Override
+  public void onListFragmentInteraction(DummyItem item) {
 
-    } else if (id == R.id.nav_track) {
+  }
 
+  @Override
+  public void onFragmentInteraction(Uri uri) {
+  }
 
+  private void displaySelectedScreen(int id) {
+    Fragment fragment = null;
+
+    switch(id){
+      case R.id.nav_saved:
+        fragment = new ResultsFragment();
+        break;
+      case R.id.nav_track:
+        fragment = new ResultsFragment();
+        break;
+      case  R.id.nav_home:
+        fragment = new HomeFragment();
+        break;
+    }
+    if(fragment != null) {
+      FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+      ft.replace(R.id.content_main, fragment);
+      ft.commit();
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
-    return true;
   }
+
+  public void searchClick(View view){
+    Fragment fragment = new ResultsFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
+  }
+
 }

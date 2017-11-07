@@ -12,13 +12,11 @@ import android.view.ViewGroup;
 import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent;
 import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
  * the {@link OnListFragmentInteractionListener} interface.
  */
-public class SearchResultsFragment extends Fragment {
+public class ResultsFragment extends Fragment {
 
   // TODO: Customize parameter argument names
   private static final String ARG_COLUMN_COUNT = "column-count";
@@ -30,13 +28,13 @@ public class SearchResultsFragment extends Fragment {
    * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
    * screen orientation changes).
    */
-  public SearchResultsFragment() {
+  public ResultsFragment() {
   }
 
   // TODO: Customize parameter initialization
   @SuppressWarnings("unused")
-  public static SearchResultsFragment newInstance(int columnCount) {
-    SearchResultsFragment fragment = new SearchResultsFragment();
+  public static ResultsFragment newInstance(int columnCount) {
+    ResultsFragment fragment = new ResultsFragment();
     Bundle args = new Bundle();
     args.putInt(ARG_COLUMN_COUNT, columnCount);
     fragment.setArguments(args);
@@ -55,7 +53,7 @@ public class SearchResultsFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_search_results_list, container, false);
+    View view = inflater.inflate(R.layout.fragment_results_list, container, false);
 
     // Set the adapter
     if (view instanceof RecyclerView) {
@@ -67,7 +65,7 @@ public class SearchResultsFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
       }
       recyclerView
-          .setAdapter(new MySearchResultsRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+          .setAdapter(new ResultsRecyclerViewAdapter(DummyContent.ITEMS, mListener));
     }
     return view;
   }

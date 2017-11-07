@@ -10,5 +10,5 @@
   android:layout_marginRight="16dp"
   android:name="edu.cnm.deepdive.ahg.sattrack.SearchResultsFragment"
   app:layoutManager="LinearLayoutManager"
-  tools:context="edu.cnm.deepdive.ahg.sattrack.SearchResultsFragment"
-  tools:listitem="@layout/fragment_search_results"/>
+  tools:context="edu.cnm.deepdive.ahg.sattrack.ResultsFragment"
+  tools:listitem="@layout/fragment_results"/>

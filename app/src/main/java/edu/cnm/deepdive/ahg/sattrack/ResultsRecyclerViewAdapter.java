@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.cnm.deepdive.ahg.sattrack.SearchResultsFragment.OnListFragmentInteractionListener;
+import edu.cnm.deepdive.ahg.sattrack.ResultsFragment.OnListFragmentInteractionListener;
 import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}. TODO: Replace the implementation with code
  * for your data type.
  */
-public class MySearchResultsRecyclerViewAdapter extends
-    RecyclerView.Adapter<MySearchResultsRecyclerViewAdapter.ViewHolder> {
+public class ResultsRecyclerViewAdapter extends
+    RecyclerView.Adapter<ResultsRecyclerViewAdapter.ViewHolder> {
 
   private final List<DummyItem> mValues;
   private final OnListFragmentInteractionListener mListener;
 
-  public MySearchResultsRecyclerViewAdapter(List<DummyItem> items,
+  public ResultsRecyclerViewAdapter(List<DummyItem> items,
       OnListFragmentInteractionListener listener) {
     mValues = items;
     mListener = listener;
@@ -31,7 +31,7 @@ public class MySearchResultsRecyclerViewAdapter extends
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.fragment_search_results, parent, false);
+        .inflate(R.layout.fragment_results, parent, false);
     return new ViewHolder(view);
   }
 

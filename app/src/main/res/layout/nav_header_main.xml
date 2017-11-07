@@ -10,7 +10,7 @@
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:gravity="bottom"
   android:orientation="vertical"
-  android:background="@color/colorTransparentBackground"
+  android:background="@color/colorTheme"
   android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
