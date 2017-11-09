@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent;
-import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
+import edu.cnm.deepdive.ahg.sattrack.dummy.Content;
+import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
@@ -65,7 +65,7 @@ public class ResultsFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
       }
       recyclerView
-          .setAdapter(new ResultsRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+          .setAdapter(new ResultsRecyclerViewAdapter(Content.ITEMS, mListener));
     }
     return view;
   }
@@ -99,6 +99,6 @@ public class ResultsFragment extends Fragment {
   public interface OnListFragmentInteractionListener {
 
     // TODO: Update argument type and name
-    void onListFragmentInteraction(DummyItem item);
+    void onListFragmentInteraction(Sats item);
   }
 }

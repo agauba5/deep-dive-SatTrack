@@ -7,22 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.cnm.deepdive.ahg.sattrack.ResultsFragment.OnListFragmentInteractionListener;
-import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
+import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Sats} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}. TODO: Replace the implementation with code
  * for your data type.
  */
 public class ResultsRecyclerViewAdapter extends
     RecyclerView.Adapter<ResultsRecyclerViewAdapter.ViewHolder> {
 
-  private final List<DummyItem> mValues;
+  private final List<Sats> mValues;
   private final OnListFragmentInteractionListener mListener;
 
-  public ResultsRecyclerViewAdapter(List<DummyItem> items,
+  public ResultsRecyclerViewAdapter(List<Sats> items,
       OnListFragmentInteractionListener listener) {
     mValues = items;
     mListener = listener;
@@ -63,7 +63,7 @@ public class ResultsRecyclerViewAdapter extends
     public final View mView;
     public final TextView mIdView;
     public final TextView mContentView;
-    public DummyItem mItem;
+    public Sats mItem;
 
     public ViewHolder(View view) {
       super(view);

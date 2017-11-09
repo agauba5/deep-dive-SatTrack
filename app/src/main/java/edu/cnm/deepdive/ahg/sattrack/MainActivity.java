@@ -14,12 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import edu.cnm.deepdive.ahg.sattrack.dummy.DummyContent.DummyItem;
+import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener , HomeFragment.OnFragmentInteractionListener{
+    implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener ,
+    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener{
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction home = getSupportFragmentManager().beginTransaction().add(R.id.content_main, homeFragment);
     home.commit();
 
+
   }
 
   private Toolbar setupToolbar() {
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity
 
   private void setupDrawer(Toolbar toolbar) {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+      ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+          this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.setDrawerListener(toggle);
     toggle.syncState();
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
   @Override
-  public void onListFragmentInteraction(DummyItem item) {
+  public void onListFragmentInteraction(Sats item) {
 
   }
 
@@ -130,5 +130,10 @@ public class MainActivity extends AppCompatActivity
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
-
+  public void displayClick(View view){
+    Fragment fragment = new DisplaySatFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
+  }
 }
