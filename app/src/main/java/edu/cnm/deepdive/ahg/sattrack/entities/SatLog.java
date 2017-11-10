@@ -23,8 +23,8 @@ public class SatLog {
   @DatabaseField(columnName = "NOTES", canBeNull = true)
   private String notes;
 
-  @DatabaseField(columnName = "SATNAME", canBeNull = false, foreign = true)
-  private Satellite satName;
+  @DatabaseField(columnName = "SATELLITE", canBeNull = false, foreign = true, foreignAutoRefresh = true)
+  private Satellite satellite;
 
 
   public int getLogNumber() {
@@ -52,12 +52,12 @@ public class SatLog {
     this.notes = notes;
   }
 
-  public Satellite getSatName() {
-    return satName;
+  public Satellite getSatellite() {
+    return satellite;
   }
 
-  public void setSatName(Satellite satName) {
-    this.satName = satName;
+  public void setSatellite(Satellite satellite) {
+    this.satellite = satellite;
   }
 
   @Override

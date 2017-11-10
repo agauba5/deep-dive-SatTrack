@@ -5,8 +5,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
-@DatabaseTable(tableName = "SATELLITES")
+@DatabaseTable(tableName = "SATELLITE")
 public class Satellite {
+
+  @DatabaseField(columnName = "SATELLITE_ID", generatedId = true)
+  private int id;
 
   @DatabaseField(columnName = "NORAD_CAT_ID", canBeNull = false)
   private String noradId;
@@ -17,17 +20,17 @@ public class Satellite {
   @DatabaseField(columnName = "SATNAME", canBeNull = false)
   private String satName;
 
-  @DatabaseField(columnName = "COUNTRY", canBeNull = false)
-  private String countryId;
+  @DatabaseField(columnName = "ORGANIZATION_ID", canBeNull = false, foreign = true, foreignAutoRefresh = true)
+  private Organization organization;
 
   @DatabaseField(columnName = "LAUNCH_DATE", format = "yyyy-MM-dd", canBeNull = false)
   private Date launchDate;
 
   @DatabaseField(columnName = "PERIOD", canBeNull = false)
-  private int orbitPeriod;
+  private double orbitPeriod;
 
   @DatabaseField(columnName = "INCLINATION", canBeNull = false)
-  private int inclination;
+  private double inclination;
 
   @DatabaseField(columnName = "APOGEE", canBeNull = false)
   private int apogee;
@@ -38,6 +41,9 @@ public class Satellite {
   @DatabaseField(columnName = "OBJECT_ID", canBeNull = false)
   private String objectId;
 
+  public int getId() {
+    return id;
+  }
 
   public String getNoradId() {
     return noradId;
@@ -63,12 +69,12 @@ public class Satellite {
     this.satName = satName;
   }
 
-  public String getCountryId() {
-    return countryId;
+  public Organization getOrganization() {
+    return organization;
   }
 
-  public void setCountryId(String countryId) {
-    this.countryId = countryId;
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
   }
 
   public Date getLaunchDate() {
@@ -79,19 +85,19 @@ public class Satellite {
     this.launchDate = launchDate;
   }
 
-  public int getOrbitPeriod() {
+  public double getOrbitPeriod() {
     return orbitPeriod;
   }
 
-  public void setOrbitPeriod(int orbitPeriod) {
+  public void setOrbitPeriod(double orbitPeriod) {
     this.orbitPeriod = orbitPeriod;
   }
 
-  public int getInclination() {
+  public double getInclination() {
     return inclination;
   }
 
-  public void setInclination(int inclination) {
+  public void setInclination(double inclination) {
     this.inclination = inclination;
   }
 
@@ -109,5 +115,13 @@ public class Satellite {
 
   public void setPerigee(int perigee) {
     this.perigee = perigee;
+  }
+
+  public String getObjectId() {
+    return objectId;
+  }
+
+  public void setObjectId(String objectId) {
+    this.objectId = objectId;
   }
 }

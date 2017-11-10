@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Android SQLite" uuid="ad7f1cf2-79c0-48c0-8639-9bf53d1e865a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Abdul Haseeb Gauba\.IntelliJIdea2017.2\system\android\databases\EMULATOR_Nexus_5X_API_26_x86\edu.cnm.deepdive.ahg.sattrack\internal\satellites.db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Android SQLite" uuid="484074b6-0493-4d2d-98c7-f96b87c7b4d4">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+    </data-source>
+    <data-source source="LOCAL" name="Android SQLite" uuid="0d1057c3-e29e-4f95-ae1a-ae6def8fd9e7">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+    </data-source>
+    <data-source source="LOCAL" name="Android SQLite" uuid="9ab84365-5eb3-4d0a-99c1-46d361c17e36">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Abdul Haseeb Gauba\.IntelliJIdea2017.2\system\android\databases\EMULATOR_Nexus_5X_API_26_x86\edu.cnm.deepdive.ahg.sattrack\internal\satellites.db</jdbc-url>
+    </data-source>
+  </component>
+</project>

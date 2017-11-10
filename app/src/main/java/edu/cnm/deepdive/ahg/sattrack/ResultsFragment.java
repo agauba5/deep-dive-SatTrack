@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import edu.cnm.deepdive.ahg.sattrack.dummy.Content;
-import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
+import edu.cnm.deepdive.ahg.sattrack.content.Content;
+import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
 
 /**
  * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement

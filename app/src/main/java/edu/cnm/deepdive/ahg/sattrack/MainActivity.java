@@ -14,22 +14,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
+import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener ,
-    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener{
+    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction{
+
+  private OrmHelper helper = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getHelper().getWritableDatabase().close();
     setContentView(R.layout.activity_main);
     Toolbar toolbar = setupToolbar();
     setupDrawer(toolbar);
     HomeFragment homeFragment = new  HomeFragment();
     FragmentTransaction home = getSupportFragmentManager().beginTransaction().add(R.id.content_main, homeFragment);
     home.commit();
-
 
   }
 
@@ -123,6 +127,34 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
   }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    getHelper();
+  }
+
+  @Override
+  protected void onStop() {
+    releaseHelper();
+    super.onStop();
+  }
+
+  @Override
+  public synchronized OrmHelper getHelper() {
+    if (helper == null) {
+      helper = OpenHelperManager.getHelper(this, OrmHelper.class);
+    }
+    return helper;
+  }
+
+  public synchronized void releaseHelper() {
+    if (helper != null) {
+      OpenHelperManager.releaseHelper();
+      helper = null;
+    }
+  }
+
 
   public void searchClick(View view){
     Fragment fragment = new ResultsFragment();

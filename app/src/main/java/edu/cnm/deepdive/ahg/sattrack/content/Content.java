@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.ahg.sattrack.dummy;
+package edu.cnm.deepdive.ahg.sattrack.content;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class Content {
    */
   public static final Map<String, Sats> ITEM_MAP = new HashMap<String, Sats>();
 
-  private static final int COUNT =10;
+  private static final int COUNT =20;
 
   static {
     // Add some sample items.

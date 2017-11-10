@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.cnm.deepdive.ahg.sattrack.ResultsFragment.OnListFragmentInteractionListener;
-import edu.cnm.deepdive.ahg.sattrack.dummy.Content.Sats;
+import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
 
 import java.util.List;
 
