@@ -20,7 +20,7 @@ public class Organization {
 
   @Expose
   @SerializedName("SPADOC_CD")
-  @DatabaseField(columnName = "SPADOC_CD", canBeNull = false)
+  @DatabaseField(columnName = "SPADOC_CD", canBeNull = false, index = true)
   private String countryId;
 
   @Expose

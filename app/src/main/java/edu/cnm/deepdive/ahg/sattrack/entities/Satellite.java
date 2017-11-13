@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.ahg.sattrack.entities;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
@@ -11,35 +13,51 @@ public class Satellite {
   @DatabaseField(columnName = "SATELLITE_ID", generatedId = true)
   private int id;
 
-  @DatabaseField(columnName = "NORAD_CAT_ID", canBeNull = false)
+  @Expose
+  @SerializedName("NORAD_CAT_ID")
+  @DatabaseField(columnName = "NORAD_CAT_ID", canBeNull = false, index = true)
   private String noradId;
 
+  @Expose
+  @SerializedName("OBJECT_TYPE")
   @DatabaseField(columnName = "OBJECT_TYPE", canBeNull = false)
   private String objectType;
 
-  @DatabaseField(columnName = "SATNAME", canBeNull = false)
+  @Expose
+  @SerializedName("OBJECT_NAME")
+  @DatabaseField(columnName = "OBJECT_NAME", canBeNull = false)
   private String satName;
 
-  @DatabaseField(columnName = "ORGANIZATION_ID", canBeNull = false, foreign = true, foreignAutoRefresh = true)
+
+
+  @DatabaseField(columnName = "ORGANIZATION_ID", canBeNull = true, foreign = true, foreignAutoRefresh = true, index = true)
   private Organization organization;
 
-  @DatabaseField(columnName = "LAUNCH_DATE", format = "yyyy-MM-dd", canBeNull = false)
-  private Date launchDate;
-
+  @Expose
+  @SerializedName("PERIOD")
   @DatabaseField(columnName = "PERIOD", canBeNull = false)
   private double orbitPeriod;
 
+  @Expose
+  @SerializedName("INCLINATION")
   @DatabaseField(columnName = "INCLINATION", canBeNull = false)
   private double inclination;
 
+  @Expose
+  @SerializedName("APOGEE")
   @DatabaseField(columnName = "APOGEE", canBeNull = false)
-  private int apogee;
+  private double apogee;
 
+  @Expose
+  @SerializedName("PERIGEE")
   @DatabaseField(columnName = "PERIGEE", canBeNull = false)
-  private int perigee;
+  private double perigee;
 
+  @Expose
+  @SerializedName("OBJECT_ID")
   @DatabaseField(columnName = "OBJECT_ID", canBeNull = false)
   private String objectId;
+
 
   public int getId() {
     return id;
@@ -77,14 +95,6 @@ public class Satellite {
     this.organization = organization;
   }
 
-  public Date getLaunchDate() {
-    return launchDate;
-  }
-
-  public void setLaunchDate(Date launchDate) {
-    this.launchDate = launchDate;
-  }
-
   public double getOrbitPeriod() {
     return orbitPeriod;
   }
@@ -101,7 +111,7 @@ public class Satellite {
     this.inclination = inclination;
   }
 
-  public int getApogee() {
+  public double getApogee() {
     return apogee;
   }
 
@@ -109,7 +119,7 @@ public class Satellite {
     this.apogee = apogee;
   }
 
-  public int getPerigee() {
+  public double getPerigee() {
     return perigee;
   }
 

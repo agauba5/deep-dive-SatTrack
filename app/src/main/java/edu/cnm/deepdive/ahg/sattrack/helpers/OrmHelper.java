@@ -4,8 +4,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import edu.cnm.deepdive.ahg.sattrack.R;
@@ -19,12 +25,13 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
-import junit.framework.Assert;
 
 public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "satellites.db";
   private static final int DATABASE_VERSION = 1;
+  private static final String COUNTRY = "COUNTRY";
+  private static final String CAT_ID = "NORAD_CAT_ID";
 
   private Dao<Organization, Integer> organizationDao = null;
   private Dao<Satellite, Integer> satelliteDao = null;
@@ -87,18 +94,61 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
     // TODO add for loop to populate dropdown spinner for country filter
 
     Organization organization = null;
-    Satellite satellite;
+    Satellite satellite = null;
     Calendar calendar;
     SatLog satLog;
     List<Organization> testOrg;
     List<Satellite> testSat;
 
-    try (Reader reader = new InputStreamReader(context.getResources().openRawResource(R.raw.sample_content))) {
-      Gson data = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-      Organization[] orgs = data.fromJson(reader, Organization[].class);
-      for (Organization org :orgs) {
+    try (Reader reader = new InputStreamReader(
+        context.getResources().openRawResource(R.raw.org_content))) {
+      Gson orgData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+      Organization[] orgs = orgData.fromJson(reader, Organization[].class);
+      for (Organization org : orgs) {
         getOrganizationDao().create(org);
-        organization = org;
+      }
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+
+    try (Reader reader = new InputStreamReader(
+        context.getResources().openRawResource(R.raw.sat_content))) {
+      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+      try (JsonReader satReader = new JsonReader(reader)) {
+        satReader.beginArray();
+        while (satReader.hasNext()) {
+          Satellite sat = satData.fromJson(satReader, Satellite.class);
+          getSatelliteDao().create(sat);
+          satellite = sat;
+        }
+      }
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    try (Reader reader = new InputStreamReader(
+        context.getResources().openRawResource(R.raw.sat_content2))) {
+      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+      JsonParser parser = new JsonParser();
+      try (JsonReader satReader = new JsonReader(reader)) {
+        satReader.beginArray();
+        while (satReader.hasNext()) {
+          JsonObject object = parser.parse(satReader).getAsJsonObject();
+          String catId = object.get(CAT_ID).getAsString();
+          String country = object.get(COUNTRY).getAsString();
+          QueryBuilder<Organization,Integer> queryBuilder = getOrganizationDao().queryBuilder();
+          queryBuilder.where().eq("SPADOC_CD", country);
+          Organization org = getOrganizationDao().queryForFirst(queryBuilder.prepare());
+          UpdateBuilder<Satellite,Integer> builder = getSatelliteDao().updateBuilder();
+          builder.where().eq(CAT_ID , catId);
+          builder.updateColumnValue("ORGANIZATION_ID",org.getId());
+          getSatelliteDao().update(builder.prepare());
+        }
       }
     } catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
@@ -109,28 +159,13 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
 
     calendar = Calendar.getInstance();
+    satLog = new SatLog();
     calendar.set(2017,11,10);
-    satellite = new Satellite();
-    satellite.setNoradId("20194");
-    satellite.setObjectType("ROCKET BODY");
-    satellite.setSatName("DELTA 1 R/B");
-    satellite.setOrganization(organization);
-    satellite.setOrbitPeriod(88.03);
-    satellite.setInclination(26.69);
-    satellite.setApogee(190);
-    satellite.setPerigee(164);
-    satellite.setObjectId("1989-067B");
-    satellite.setLaunchDate(calendar.getTime());
-    getSatelliteDao().create(satellite);
-//
-//    calendar = Calendar.getInstance();
-//    satLog = new SatLog();
-//    calendar.set(2017,11,10);
-//    satLog.setDate(calendar.getTime());
-//    satLog.setSatellite(satellite);
-//    satLog.setNotes("Observed object");
-//    getSatLogDao().create(satLog);
-//
+    satLog.setDate(calendar.getTime());
+    satLog.setSatellite(satellite);
+    satLog.setNotes("Observed object");
+    getSatLogDao().create(satLog);
+
 //    testOrg = getOrganizationDao().queryForAll();
 //    Assert.assertEquals(testOrg.size(),1);
 //    testSat = getSatelliteDao().queryForAll();
