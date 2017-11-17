@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/note_log"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:weightSum="1">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="10dp"
+      android:orientation="vertical">
+      <MultiAutoCompleteTextView
+        android:id="@+id/note_input"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+
+        android:hint="Insert Notes"
+        />
+    </LinearLayout>
+  <EditText
+    android:id="@+id/date_observed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:layout_gravity="center"
+    android:hint="Select Date Observed"/>
+
+  <ListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+      
+  </ListView>
+
+</LinearLayout>

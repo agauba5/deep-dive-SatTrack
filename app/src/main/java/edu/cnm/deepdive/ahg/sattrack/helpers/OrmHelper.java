@@ -92,80 +92,80 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
   private void populateDatabase() throws SQLException {
     // TODO add for loop to populate dropdown spinner for country filter
-
-    Organization organization = null;
-    Satellite satellite = null;
-    Calendar calendar;
-    SatLog satLog;
-    List<Organization> testOrg;
-    List<Satellite> testSat;
-
-    try (Reader reader = new InputStreamReader(
-        context.getResources().openRawResource(R.raw.org_content))) {
-      Gson orgData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-      Organization[] orgs = orgData.fromJson(reader, Organization[].class);
-      for (Organization org : orgs) {
-        getOrganizationDao().create(org);
-      }
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-
-    try (Reader reader = new InputStreamReader(
-        context.getResources().openRawResource(R.raw.sat_content))) {
-      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-      try (JsonReader satReader = new JsonReader(reader)) {
-        satReader.beginArray();
-        while (satReader.hasNext()) {
-          Satellite sat = satData.fromJson(satReader, Satellite.class);
-          getSatelliteDao().create(sat);
-          satellite = sat;
-        }
-      }
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-    try (Reader reader = new InputStreamReader(
-        context.getResources().openRawResource(R.raw.sat_content2))) {
-      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-      JsonParser parser = new JsonParser();
-      try (JsonReader satReader = new JsonReader(reader)) {
-        satReader.beginArray();
-        while (satReader.hasNext()) {
-          JsonObject object = parser.parse(satReader).getAsJsonObject();
-          String catId = object.get(CAT_ID).getAsString();
-          String country = object.get(COUNTRY).getAsString();
-          QueryBuilder<Organization,Integer> queryBuilder = getOrganizationDao().queryBuilder();
-          queryBuilder.where().eq("SPADOC_CD", country);
-          Organization org = getOrganizationDao().queryForFirst(queryBuilder.prepare());
-          UpdateBuilder<Satellite,Integer> builder = getSatelliteDao().updateBuilder();
-          builder.where().eq(CAT_ID , catId);
-          builder.updateColumnValue("ORGANIZATION_ID",org.getId());
-          getSatelliteDao().update(builder.prepare());
-        }
-      }
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-
-
-    calendar = Calendar.getInstance();
-    satLog = new SatLog();
-    calendar.set(2017,11,10);
-    satLog.setDate(calendar.getTime());
-    satLog.setSatellite(satellite);
-    satLog.setNotes("Observed object");
-    getSatLogDao().create(satLog);
-
+//
+//    Organization organization = null;
+//    Satellite satellite = null;
+//    Calendar calendar;
+//    SatLog satLog;
+//    List<Organization> testOrg;
+//    List<Satellite> testSat;
+//
+//    try (Reader reader = new InputStreamReader(
+//        context.getResources().openRawResource(R.raw.org_content))) {
+//      Gson orgData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//      Organization[] orgs = orgData.fromJson(reader, Organization[].class);
+//      for (Organization org : orgs) {
+//        getOrganizationDao().create(org);
+//      }
+//    } catch (UnsupportedEncodingException e) {
+//      throw new RuntimeException(e);
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+//
+//
+//    try (Reader reader = new InputStreamReader(
+//        context.getResources().openRawResource(R.raw.sat_content))) {
+//      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//      try (JsonReader satReader = new JsonReader(reader)) {
+//        satReader.beginArray();
+//        while (satReader.hasNext()) {
+//          Satellite sat = satData.fromJson(satReader, Satellite.class);
+//          getSatelliteDao().create(sat);
+//          satellite = sat;
+//        }
+//      }
+//    } catch (UnsupportedEncodingException e) {
+//      throw new RuntimeException(e);
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+//
+//    try (Reader reader = new InputStreamReader(
+//        context.getResources().openRawResource(R.raw.sat_content2))) {
+//      Gson satData = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//      JsonParser parser = new JsonParser();
+//      try (JsonReader satReader = new JsonReader(reader)) {
+//        satReader.beginArray();
+//        while (satReader.hasNext()) {
+//          JsonObject object = parser.parse(satReader).getAsJsonObject();
+//          String catId = object.get(CAT_ID).getAsString();
+//          String country = object.get(COUNTRY).getAsString();
+//          QueryBuilder<Organization,Integer> queryBuilder = getOrganizationDao().queryBuilder();
+//          queryBuilder.where().eq("SPADOC_CD", country);
+//          Organization org = getOrganizationDao().queryForFirst(queryBuilder.prepare());
+//          UpdateBuilder<Satellite,Integer> builder = getSatelliteDao().updateBuilder();
+//          builder.where().eq(CAT_ID , catId);
+//          builder.updateColumnValue("ORGANIZATION_ID",org.getId());
+//          getSatelliteDao().update(builder.prepare());
+//        }
+//      }
+//    } catch (UnsupportedEncodingException e) {
+//      throw new RuntimeException(e);
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+//
+//
+//
+//    calendar = Calendar.getInstance();
+//    satLog = new SatLog();
+//    calendar.set(2017,11,10);
+//    satLog.setDate(calendar.getTime());
+//    satLog.setSatellite(satellite);
+//    satLog.setNotes("Observed object");
+//    getSatLogDao().create(satLog);
+//
 //    testOrg = getOrganizationDao().queryForAll();
 //    Assert.assertEquals(testOrg.size(),1);
 //    testSat = getSatelliteDao().queryForAll();

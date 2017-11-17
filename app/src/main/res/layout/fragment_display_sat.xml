@@ -2,7 +2,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="edu.cnm.deepdive.ahg.sattrack.DisplaySatFragment">
+  tools:context="edu.cnm.deepdive.ahg.sattrack.fragments.DisplaySatFragment">
 
 
   <LinearLayout
@@ -11,15 +11,22 @@
     android:orientation="vertical">
     <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:orientation="horizontal"
+      android:layout_marginTop="450dp"
       >
       <Button
-        android:id="@+id/Save_button"
+        android:id="@+id/notes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Save"/>
+        android:text="Notes"/>
+      <Button
+        android:id="@+id/favorites_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Favorite"/>
       <Button
         android:id="@+id/track_button"
         android:layout_width="wrap_content"

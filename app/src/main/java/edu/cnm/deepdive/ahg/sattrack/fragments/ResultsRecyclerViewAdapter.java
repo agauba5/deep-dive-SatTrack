@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.ahg.sattrack;
+package edu.cnm.deepdive.ahg.sattrack.fragments;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.cnm.deepdive.ahg.sattrack.ResultsFragment.OnListFragmentInteractionListener;
+import edu.cnm.deepdive.ahg.sattrack.R;
+import edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment.OnListFragmentInteractionListener;
 import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
 
 import java.util.List;

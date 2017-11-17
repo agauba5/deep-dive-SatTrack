@@ -10,7 +10,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "SATELLITE_LOG")
 public class SatLog {
 
-  @DatabaseField(columnName = "LOG_NUMBER", generatedId = true)
+  @DatabaseField(columnName = "LOG_NUMBER", generatedId = true, canBeNull = true)
   private int logNumber;
 
   @DatabaseField(columnName = "CREATED", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
