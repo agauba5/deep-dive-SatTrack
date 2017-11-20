@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import edu.cnm.deepdive.ahg.sattrack.R;
@@ -26,9 +27,10 @@ import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener ,
-    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction{
+    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction, OnClickListener{
 
   private OrmHelper helper = null;
+  Button searchbtn;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,12 @@ public class MainActivity extends AppCompatActivity
     setContentView(R.layout.activity_main);
     Toolbar toolbar = setupToolbar();
     setupDrawer(toolbar);
-    HomeFragment homeFragment = new  HomeFragment();
-    FragmentTransaction home = getSupportFragmentManager().beginTransaction().add(R.id.content_main, homeFragment);
+    HomeFragment homeFragment = new HomeFragment();
+    FragmentTransaction home = getSupportFragmentManager().beginTransaction()
+        .add(R.id.content_main, homeFragment);
     home.commit();
-
   }
+
 
   private Toolbar setupToolbar() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -176,4 +179,20 @@ public class MainActivity extends AppCompatActivity
   }
 
 
+  @Override
+  public void onClick(View view) {
+    Fragment fragment = new ResultsFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    switch (view.getId()){
+      case R.id.search_by_id_button:
+        ft.replace(R.id.content_main, fragment);
+        ft.commit();
+        break;
+      case R.id.parameter_search_button:
+        ft.replace(R.id.content_main, fragment);
+        ft.commit();
+        break;
+
+    }
+  }
 }

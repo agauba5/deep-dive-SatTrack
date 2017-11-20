@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/note_log"
   android:orientation="vertical"
   android:layout_width="match_parent"
@@ -28,11 +29,13 @@
     android:layout_gravity="center"
     android:hint="Select Date Observed"/>
 
-  <ListView
+  <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:name="edu.cnm.deepdive.ahg.sattrack.ResultsFragment"
+    tools:context="edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment"
+    tools:listitem="@layout/note_log_element"/>
 
-  </ListView>
 
 </LinearLayout>
