@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Android SQLite phone" uuid="590a26ca-bdab-4f06-a7d1-e2edc536e367">
+    <data-source source="LOCAL" name="Android SQLite" uuid="e98fad26-a1a9-44c6-93da-17648f35c71d">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <libraries>
@@ -12,10 +12,6 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.16.1/xerial-sqlite-license.txt</url>
         </library>
       </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Android SQLite" uuid="34a5a166-e671-4605-b5bb-b89e4bbfb442">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
     </data-source>
   </component>
 </project>

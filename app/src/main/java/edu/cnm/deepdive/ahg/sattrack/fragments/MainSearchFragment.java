@@ -74,7 +74,7 @@ public class MainSearchFragment extends Fragment {
       types.add(row[0]);
     }
     ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, types);
-    country.setAdapter(adapter);
+    objectType.setAdapter(adapter);
   }
 
 }
