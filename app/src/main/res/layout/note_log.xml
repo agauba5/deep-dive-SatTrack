@@ -37,5 +37,4 @@
     tools:context="edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment"
     tools:listitem="@layout/note_log_element"/>
 
-
 </LinearLayout>

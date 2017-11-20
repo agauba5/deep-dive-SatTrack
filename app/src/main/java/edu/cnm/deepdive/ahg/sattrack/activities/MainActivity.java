@@ -22,12 +22,14 @@ import edu.cnm.deepdive.ahg.sattrack.R;
 import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
 import edu.cnm.deepdive.ahg.sattrack.fragments.DisplaySatFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.HomeFragment;
+import edu.cnm.deepdive.ahg.sattrack.fragments.MainSearchFragment;
+import edu.cnm.deepdive.ahg.sattrack.fragments.ParameterSearchFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment;
 import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener ,
-    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction, OnClickListener{
+    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction{
 
   private OrmHelper helper = null;
   Button searchbtn;
@@ -177,22 +179,33 @@ public class MainActivity extends AppCompatActivity
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
-
-
-  @Override
-  public void onClick(View view) {
-    Fragment fragment = new ResultsFragment();
+  public void mainSearchClick(View view){
+    Fragment fragment = new MainSearchFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    switch (view.getId()){
-      case R.id.search_by_id_button:
-        ft.replace(R.id.content_main, fragment);
-        ft.commit();
-        break;
-      case R.id.parameter_search_button:
-        ft.replace(R.id.content_main, fragment);
-        ft.commit();
-        break;
-
-    }
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
   }
+  public void parameterSearchClick(View view){
+    Fragment fragment = new ParameterSearchFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
+  }
+
+//  @Override
+//  public void onClick(View view) {
+//    Fragment fragment = new ResultsFragment();
+//    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//    switch (view.getId()){
+//      case R.id.search_by_id_button:
+//        ft.replace(R.id.content_main, fragment);
+//        ft.commit();
+//        break;
+//      case R.id.parameter_search_button:
+//        ft.replace(R.id.content_main, fragment);
+//        ft.commit();
+//        break;
+//
+//    }
+//  }
 }
