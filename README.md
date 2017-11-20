@@ -8,17 +8,17 @@ parameters of the object are the latitude, longitude, Mean Velocity, apogee, per
 
 #### Steps to completing project
 
-•	Have database added on install
-•	Updated UI with spinners
-•	Populate data to the added spinners
-•	Create search and populate results fragment
-•	Use SOAP API to pull the current parameters of the selected satellite
-•	Display parameters in UI
+*	Have database added on install
+*	Updated UI with spinners
+*	Populate data to the added spinners
+*	Create search and populate results fragment
+*	Use SOAP API to pull the current parameters of the selected satellite
+*	Display parameters in UI
 
 #### Stretch Goal
 
-•	Incorporate Google Maps API
-•	Use latitude and longitude to display current satellite position
-•	Use parameters to calculate path of satellite
-•	Use parameters to calculate the angle from user to satellite
-•	Output the angles to an external device
+*	Incorporate Google Maps API
+*	Use latitude and longitude to display current satellite position
+*	Use parameters to calculate path of satellite
+*	Use parameters to calculate the angle from user to satellite
+*	Output the angles to an external device
