@@ -15,7 +15,7 @@ parameters of the object are the latitude, longitude, Mean Velocity, apogee, per
 *	Use SOAP API to pull the current parameters of the selected satellite
 *	Display parameters in UI
 
-#### Stretch Goal
+#### Stretch Goals
 
 *	Incorporate Google Maps API
 *	Use latitude and longitude to display current satellite position
