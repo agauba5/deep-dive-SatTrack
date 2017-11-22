@@ -43,32 +43,35 @@
         android:text="km"/>
     </LinearLayout>
     <EditText
-      android:id="@+id/altitude_search_bar"
+      android:id="@+id/orbit_period_search_bar"
       android:layout_width="110dp"
       android:layout_height="wrap_content"
       android:layout_marginEnd="15dp"
-      android:hint="Altitude"
-      android:inputType="textPersonName"/>
+      android:hint="Orbit Period"
+      android:inputType="textPersonName"
+      android:layout_weight="0.02"/>
+
   </LinearLayout>
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
     <EditText
-      android:id="@+id/local_time_search_bar"
+      android:id="@+id/apogee_search_bar"
       android:layout_width="110dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="15dp"
       android:layout_marginEnd="55dp"
-      android:hint="Local Time"
+      android:hint="Apogee"
       android:inputType="textPersonName"/>
     <EditText
-      android:id="@+id/orbit_period_search_bar"
+      android:id="@+id/parigee_search_bar"
       android:layout_width="110dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="55dp"
       android:layout_marginEnd="15dp"
-      android:hint="Orbit Period"
+      android:hint="Parigee"
+
       android:inputType="textPersonName"/>
   </LinearLayout>
     <LinearLayout
@@ -76,20 +79,20 @@
       android:layout_height="match_parent"
       android:orientation="horizontal">
       <EditText
-        android:id="@+id/latitude_search_bar"
+        android:id="@+id/eccentricity_search_bar"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="55dp"
-        android:hint="Latitude"
+        android:hint="Eccentricity"
         android:inputType="textPersonName"/>
       <EditText
-        android:id="@+id/longitude_search_bar"
+        android:id="@+id/inclination_search_bar"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginEnd="15dp"
-        android:hint="Longitude"
+        android:hint="Inclination"
         android:inputType="textPersonName"/>
 
     </LinearLayout>
@@ -97,7 +100,7 @@
       android:id="@+id/parameter_search_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="searchClick"
+      android:onClick="loadResultsFragment"
       android:text="Parameter Search"
       />
   </LinearLayout>

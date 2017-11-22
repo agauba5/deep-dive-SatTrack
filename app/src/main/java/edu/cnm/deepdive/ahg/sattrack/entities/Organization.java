@@ -114,15 +114,7 @@ public class Organization {
 
   @Override
   public String toString() {
-    Map<String, Object> map = new HashMap<>();
-    map.put("COUNTRY", country);
-    map.put("SPADOC_CD", countryId);
-    map.put("ORBITAL_PAYLOAD_COUNT", orbitalPayloadCount);
-    map.put("ORBITAL_ROCKET_BODY_COUNT", orbitalRocketBodyCount);
-    map.put("ORBITAL_DEBRIS_COUNT", orbitalDebrisCount);
-    map.put("ORBITAL_TOTAL_COUNT", orbitalTotalCount);
-    map.put("COUNTRY_TOTAL_COUNT", countryTotalLaunched);
-    return map.toString();
+  return getCountry();
 
   }
 }

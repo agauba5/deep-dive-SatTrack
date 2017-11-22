@@ -1,16 +1,12 @@
 package edu.cnm.deepdive.ahg.sattrack.fragments;
 
-import static edu.cnm.deepdive.ahg.sattrack.fragments.NotesDialogFragment.DATE_FIELD_KEY;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 

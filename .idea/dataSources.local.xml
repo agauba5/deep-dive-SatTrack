@@ -3,7 +3,7 @@
   <component name="dataSourceStorageLocal">
     <data-source name="Android SQLite" uuid="e98fad26-a1a9-44c6-93da-17648f35c71d">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
-      <introspection-schemas>*:@</introspection-schemas>
+      <introspection-schemas>*:*</introspection-schemas>
     </data-source>
   </component>
 </project>

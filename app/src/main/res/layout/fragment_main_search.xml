@@ -33,7 +33,7 @@
       android:layout_height="wrap_content"
       android:text="Search"
       android:layout_margin="20dp"
-      android:onClick="searchClick"/>
+      />
   </LinearLayout>
 
 </FrameLayout>

@@ -1,7 +1,5 @@
 package edu.cnm.deepdive.ahg.sattrack.activities;
 
-
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,11 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import edu.cnm.deepdive.ahg.sattrack.R;
-import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
 import edu.cnm.deepdive.ahg.sattrack.fragments.DisplaySatFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.HomeFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.MainSearchFragment;
@@ -28,8 +24,8 @@ import edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment;
 import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, ResultsFragment.OnListFragmentInteractionListener ,
-    HomeFragment.OnFragmentInteractionListener, DisplaySatFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction{
+    implements NavigationView.OnNavigationItemSelectedListener,
+    HomeFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction {
 
   private OrmHelper helper = null;
   Button searchbtn;
@@ -106,10 +102,7 @@ public class MainActivity extends AppCompatActivity
     displaySelectedScreen(id);
     return true;
   }
-  @Override
-  public void onListFragmentInteraction(Sats item) {
 
-  }
 
   @Override
   public void onFragmentInteraction(Uri uri) {
@@ -167,12 +160,24 @@ public class MainActivity extends AppCompatActivity
   }
 
 
-  public void searchClick(View view){
+  public void loadResultsFragment(Bundle args){
     Fragment fragment = new ResultsFragment();
+    fragment.setArguments(args);
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
+
+  public void loadSatFragment(int id) {
+    Fragment fragment = new DisplaySatFragment();
+    Bundle args = new Bundle();
+    args.putInt(DisplaySatFragment.SAT_ID_KEY, id);
+    fragment.setArguments(args);
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
+  }
+
   public void displayClick(View view){
     Fragment fragment = new DisplaySatFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -185,12 +190,7 @@ public class MainActivity extends AppCompatActivity
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
-  public void parameterSearchClick(View view){
-    Fragment fragment = new ParameterSearchFragment();
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    ft.replace(R.id.content_main, fragment);
-    ft.commit();
-  }
+
 
 //  @Override
 //  public void onClick(View view) {

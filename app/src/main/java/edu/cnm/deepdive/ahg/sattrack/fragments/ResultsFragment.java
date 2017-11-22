@@ -1,105 +1,168 @@
 package edu.cnm.deepdive.ahg.sattrack.fragments;
 
-import android.content.Context;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import edu.cnm.deepdive.ahg.sattrack.R;
-import edu.cnm.deepdive.ahg.sattrack.content.Content;
-import edu.cnm.deepdive.ahg.sattrack.content.Content.Sats;
+import edu.cnm.deepdive.ahg.sattrack.activities.MainActivity;
+import edu.cnm.deepdive.ahg.sattrack.entities.Satellite;
+import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper.OrmInteraction;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
- * A fragment representing a list of Items. <p /> Activities containing this fragment MUST implement
- * the {@link OnListFragmentInteractionListener} interface.
+ * A fragment representing a list of Items. <p /> Activities containing this fragment MUST
+ * implement
  */
 public class ResultsFragment extends Fragment {
 
-  // TODO: Customize parameter argument names
-  private static final String ARG_COLUMN_COUNT = "column-count";
-  // TODO: Customize parameters
-  private int mColumnCount = 1;
-  private OnListFragmentInteractionListener mListener;
+  public static final String SEARCH_TYPE_KEY = "search_type";
+  public static final String ORG_ID_KEY = "org_id";
+  public static final String OBJECT_TYPE_KEY = "object_type";
 
-  /**
-   * Mandatory empty constructor for the fragment manager to instantiate the fragment (e.g. upon
-   * screen orientation changes).
-   */
-  public ResultsFragment() {
-  }
+  public static final String SPEED_KEY = "speed";
+  public static final String PERIOD_KEY = "period";
+  public static final String APOGEE_KEY = "apogee";
+  public static final String PERIGEE_KEY = "perigee";
+  public static final String INCLINATION_KEY = "inclination";
+  public static final String ECCENTRICITY_KEY = "eccentricity";
 
-  // TODO: Customize parameter initialization
-  @SuppressWarnings("unused")
-  public static ResultsFragment newInstance(int columnCount) {
-    ResultsFragment fragment = new ResultsFragment();
-    Bundle args = new Bundle();
-    args.putInt(ARG_COLUMN_COUNT, columnCount);
-    fragment.setArguments(args);
-    return fragment;
-  }
+  private static final double searchUpperBound = 1.05;
+  private static final double searchLowerBound = .95;
+
+  public static final int PRIMARY_SEARCH = 0;
+  public static final int PARAMETER_SEARCH = 1;
+
+  private ListView searchResults;
+  private Dao<Satellite, Integer> dao = null;
+  private QueryBuilder<Satellite, Integer> builder = null;
+
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Bundle args = getArguments();
+    try {
+      dao = ((OrmInteraction) getActivity()).getHelper().getSatelliteDao();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    builder = dao.queryBuilder();
+    if (args != null) {
+      int searchType = args.getInt(SEARCH_TYPE_KEY, PRIMARY_SEARCH);
+      switch (searchType) {
+        case PRIMARY_SEARCH:
+          try {
+            Where where = builder.where();
+            where.isNotNull("SATELLITE_ID");
+            int orgId = args.getInt(ORG_ID_KEY, 0);
+            String objectType = args.getString(OBJECT_TYPE_KEY, null);
+            if (orgId != 0) {
+              where.and().eq("ORGANIZATION_ID", orgId);
+            }
+            if (objectType != null) {
+              where.and().eq("OBJECT_TYPE", objectType);
+            }
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+          break;
+        case PARAMETER_SEARCH:
+          try {
+            Where where = builder.where();
+            where.isNotNull("SATELLITE_ID");
+            Double speed = Double.parseDouble(args.getString(SPEED_KEY, null));
+            Double period = Double.parseDouble(args.getString(PERIOD_KEY, null));
+            Double apogee = Double.parseDouble(args.getString(APOGEE_KEY, null));
+            Double perigee = Double.parseDouble(args.getString(PERIGEE_KEY, null));
+            Double inclination = Double.parseDouble(args.getString(INCLINATION_KEY, null));
+            Double eccentricity = Double.parseDouble(args.getString(ECCENTRICITY_KEY, null));
 
-    if (getArguments() != null) {
-      mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            if (speed != null) {
+              where.and().between("MEAN_MOTION", speed* searchLowerBound, speed*searchUpperBound);
+            }
+            if (period != null) {
+              where.and().between("PERIOD", period* searchLowerBound, period*searchUpperBound);
+            }
+            if (apogee != null) {
+              where.and().between("APOGEE", apogee* searchLowerBound, apogee*searchUpperBound);
+            }
+            if (perigee != null) {
+              where.and().between("PERIGEE", perigee* searchLowerBound, perigee*searchUpperBound);
+            }
+            if (inclination != null) {
+              where.and().between("INCLINATION", inclination* searchLowerBound, inclination*searchUpperBound);
+            }
+            if (eccentricity != null) {
+              where.and().between("ECCENTRICITY", eccentricity* searchLowerBound, eccentricity*searchUpperBound);
+            }
+
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+          break;
+      }
     }
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_results_list, container, false);
+    View root = inflater.inflate(R.layout.fragment_results_list, container, false);
+    try {
+      builder.orderBy("OBJECT_NAME", true);
+      List<Satellite> sats = dao.query(builder.prepare());
+      setupObjectNameTextView((ListView) root.findViewById(R.id.list), sats);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return root;
+  }
 
-    // Set the adapter
-    if (view instanceof RecyclerView) {
-      Context context = view.getContext();
-      RecyclerView recyclerView = (RecyclerView) view;
-      if (mColumnCount <= 1) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      } else {
-        recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+
+  private void setupObjectNameTextView(ListView list, List<Satellite> sats) throws SQLException {
+
+    ArrayAdapter<Satellite> adapter = new ArrayAdapter<>(getContext(), R.layout.fragment_results,
+        sats);
+    list.setAdapter(adapter);
+    list.setOnItemClickListener(new OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Satellite item = (Satellite) adapterView.getItemAtPosition(position);
+        ((MainActivity) getActivity()).loadSatFragment(item.getId());
       }
-      recyclerView
-          .setAdapter(new ResultsRecyclerViewAdapter(Content.ITEMS, mListener));
+    });
+  }
+
+
+  private List<String> searchResultsFilter(List<String> types, List<String[]> sats) {
+
+    for (String[] row : sats) {
+      // TODO add filter to reduce list of sat's by country and object type
+      // TODO if()
+      types.add(row[0]);
     }
-    return view;
+    return types;
   }
 
-
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof OnListFragmentInteractionListener) {
-      mListener = (OnListFragmentInteractionListener) context;
-    } else {
-      throw new RuntimeException(context.toString()
-          + " must implement OnListFragmentInteractionListener");
+  private List<String> parmaeterSearchResultsFilter(List<String> types, List<String[]> sats) {
+    // TODO add filter to reduce list of sat's by parameters searched
+    for (String[] row : sats) {
+      // TODO add filter
+      types.add(row[0]);
     }
+    return types;
   }
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
-
-  /**
-   * This interface must be implemented by activities that contain this fragment to allow an
-   * interaction in this fragment to be communicated to the activity and potentially other fragments
-   * contained in that activity.
-   * <p/>
-   * See the Android Training lesson <a href= "http://developer.android.com/training/basics/fragments/communicating.html"
-   * >Communicating with Other Fragments</a> for more information.
-   */
-  public interface OnListFragmentInteractionListener {
-
-    // TODO: Update argument type and name
-    void onListFragmentInteraction(Sats item);
-  }
 }

@@ -166,11 +166,6 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
     satLog.setNotes("Observed object");
     getSatLogDao().create(satLog);
 
-//    testOrg = getOrganizationDao().queryForAll();
-//    Assert.assertEquals(testOrg.size(),1);
-//    testSat = getSatelliteDao().queryForAll();
-//    Assert.assertEquals(testSat.size(),1);
-//    Assert.assertEquals(testSat.get(0).getOrganization().getId(),testOrg.get(0).getId());
 
   }
 

@@ -39,9 +39,19 @@ public class Satellite {
   private double orbitPeriod;
 
   @Expose
+  @SerializedName("MEAN_MOTION")
+  @DatabaseField(columnName = "MEAN_MOTION", canBeNull = false)
+  private double speed;
+
+  @Expose
   @SerializedName("INCLINATION")
   @DatabaseField(columnName = "INCLINATION", canBeNull = false)
   private double inclination;
+
+  @Expose
+  @SerializedName("ECCENTRICITY")
+  @DatabaseField(columnName = "ECCENTRICITY", canBeNull = false)
+  private double eccentricity;
 
   @Expose
   @SerializedName("APOGEE")
@@ -103,12 +113,28 @@ public class Satellite {
     this.orbitPeriod = orbitPeriod;
   }
 
+  public double getSpeed() {
+    return speed;
+  }
+
+  public void setSpeed(double speed) {
+    this.speed = speed;
+  }
+
   public double getInclination() {
     return inclination;
   }
 
   public void setInclination(double inclination) {
     this.inclination = inclination;
+  }
+
+  public double getEccentricity() {
+    return eccentricity;
+  }
+
+  public void setEccentricity(double eccentricity) {
+    this.eccentricity = eccentricity;
   }
 
   public double getApogee() {
@@ -133,5 +159,10 @@ public class Satellite {
 
   public void setObjectId(String objectId) {
     this.objectId = objectId;
+  }
+
+  @Override
+  public String toString() {
+    return getSatName();
   }
 }
