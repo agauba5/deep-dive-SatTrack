@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
     HomeFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction {
 
   private OrmHelper helper = null;
-  Button searchbtn;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity
 
   private void setupDrawer(Toolbar toolbar) {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-      ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-          this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.setDrawerListener(toggle);
     toggle.syncState();
 
@@ -111,18 +111,18 @@ public class MainActivity extends AppCompatActivity
   private void displaySelectedScreen(int id) {
     Fragment fragment = null;
 
-    switch(id){
+    switch (id) {
       case R.id.nav_saved:
         fragment = new ResultsFragment();
         break;
       case R.id.nav_track:
         fragment = new ResultsFragment();
         break;
-      case  R.id.nav_home:
+      case R.id.nav_home:
         fragment = new HomeFragment();
         break;
     }
-    if(fragment != null) {
+    if (fragment != null) {
       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
       ft.replace(R.id.content_main, fragment);
       ft.commit();
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity
   }
 
 
-  public void loadResultsFragment(Bundle args){
+  public void loadResultsFragment(Bundle args) {
     Fragment fragment = new ResultsFragment();
     fragment.setArguments(args);
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -178,34 +178,17 @@ public class MainActivity extends AppCompatActivity
     ft.commit();
   }
 
-  public void displayClick(View view){
-    Fragment fragment = new DisplaySatFragment();
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    ft.replace(R.id.content_main, fragment);
-    ft.commit();
-  }
-  public void mainSearchClick(View view){
+  public void loadMainSearch(View view) {
     Fragment fragment = new MainSearchFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
 
-
-//  @Override
-//  public void onClick(View view) {
-//    Fragment fragment = new ResultsFragment();
-//    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//    switch (view.getId()){
-//      case R.id.search_by_id_button:
-//        ft.replace(R.id.content_main, fragment);
-//        ft.commit();
-//        break;
-//      case R.id.parameter_search_button:
-//        ft.replace(R.id.content_main, fragment);
-//        ft.commit();
-//        break;
-//
-//    }
-//  }
+  public void loadParameterSearch(View view) {
+    Fragment fragment = new ParameterSearchFragment();
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.content_main, fragment);
+    ft.commit();
+  }
 }

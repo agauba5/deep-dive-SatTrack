@@ -82,29 +82,29 @@ public class ResultsFragment extends Fragment {
           try {
             Where where = builder.where();
             where.isNotNull("SATELLITE_ID");
-            Double speed = Double.parseDouble(args.getString(SPEED_KEY, null));
-            Double period = Double.parseDouble(args.getString(PERIOD_KEY, null));
-            Double apogee = Double.parseDouble(args.getString(APOGEE_KEY, null));
-            Double perigee = Double.parseDouble(args.getString(PERIGEE_KEY, null));
-            Double inclination = Double.parseDouble(args.getString(INCLINATION_KEY, null));
-            Double eccentricity = Double.parseDouble(args.getString(ECCENTRICITY_KEY, null));
+            Double speed = args.getDouble(SPEED_KEY, 0.0);
+            Double period = args.getDouble(PERIOD_KEY, 0.0);
+            Double apogee = args.getDouble(APOGEE_KEY, 0.0);
+            Double perigee = args.getDouble(PERIGEE_KEY, 0.0);
+            Double inclination = args.getDouble(INCLINATION_KEY, 0.0);
+            Double eccentricity = args.getDouble(ECCENTRICITY_KEY, 0.0);
 
-            if (speed != null) {
+            if (speed != 0.0) {
               where.and().between("MEAN_MOTION", speed* searchLowerBound, speed*searchUpperBound);
             }
-            if (period != null) {
+            if (period != 0.0) {
               where.and().between("PERIOD", period* searchLowerBound, period*searchUpperBound);
             }
-            if (apogee != null) {
+            if (apogee != 0.0) {
               where.and().between("APOGEE", apogee* searchLowerBound, apogee*searchUpperBound);
             }
-            if (perigee != null) {
+            if (perigee != 0.0) {
               where.and().between("PERIGEE", perigee* searchLowerBound, perigee*searchUpperBound);
             }
-            if (inclination != null) {
+            if (inclination != 0.0) {
               where.and().between("INCLINATION", inclination* searchLowerBound, inclination*searchUpperBound);
             }
-            if (eccentricity != null) {
+            if (eccentricity != 0.0) {
               where.and().between("ECCENTRICITY", eccentricity* searchLowerBound, eccentricity*searchUpperBound);
             }
 

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import edu.cnm.deepdive.ahg.sattrack.R;
+import edu.cnm.deepdive.ahg.sattrack.activities.MainActivity;
 
 
 /**
@@ -17,6 +19,8 @@ import edu.cnm.deepdive.ahg.sattrack.R;
  * the {@link HomeFragment#newInstance} factory method to create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+  private Button mainSearchBtn;
+  private Button parameterSearchBtn;
 
 
 
@@ -45,8 +49,25 @@ public class HomeFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_home, container, false);
+    View root =  inflater.inflate(R.layout.fragment_home, container, false);
+    mainSearchBtn = root.findViewById(R.id.main_search_button);
+    parameterSearchBtn = root.findViewById(R.id.home_parameter_search_button);
+
+    mainSearchBtn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        ((MainActivity) getActivity()).loadMainSearch(view);
+      }
+    });
+
+    parameterSearchBtn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        ((MainActivity) getActivity()).loadParameterSearch(view);
+      }
+    });
+
+    return root;
   }
 
   // TODO: Rename method, update argument and hook method into UI event
