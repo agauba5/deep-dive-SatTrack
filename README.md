@@ -60,4 +60,4 @@ Updates to the user interface that would most improve the appeal of the applicat
 
 
 ### Java docs
-https://agauba5.github.io/deep-dive-SatTrack/docs
+[javadoc](docs)
