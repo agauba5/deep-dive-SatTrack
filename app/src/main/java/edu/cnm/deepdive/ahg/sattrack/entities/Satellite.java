@@ -68,99 +68,213 @@ public class Satellite {
   @DatabaseField(columnName = "OBJECT_ID", canBeNull = false)
   private String objectId;
 
-
-  public int getId() {
-    return id;
-  }
-
-  public String getNoradId() {
-    return noradId;
-  }
-
+  /**
+   *
+   * @param noradId sets the norad catalog id
+   */
   public void setNoradId(String noradId) {
     this.noradId = noradId;
   }
 
-  public String getObjectType() {
-    return objectType;
-  }
+  /**
+   *
+   * @param objectType sets the type of object (PAYLOAD, ROCKETBODY, DEBRIS)
+   */
 
   public void setObjectType(String objectType) {
     this.objectType = objectType;
   }
 
-  public String getSatName() {
-    return satName;
-  }
+  /**
+   *
+   * @param satName sets the name of the satellite
+   */
 
   public void setSatName(String satName) {
     this.satName = satName;
   }
 
-  public Organization getOrganization() {
-    return organization;
-  }
+  /**
+   *
+   * @param organization sets an organization object which correlates the country with the satellites
+   */
 
   public void setOrganization(Organization organization) {
     this.organization = organization;
   }
 
-  public double getOrbitPeriod() {
-    return orbitPeriod;
-  }
+  /**
+   *
+   * @param orbitPeriod sets the data for the period of the orbit for the satellite
+   */
 
   public void setOrbitPeriod(double orbitPeriod) {
     this.orbitPeriod = orbitPeriod;
   }
 
-  public double getSpeed() {
-    return speed;
-  }
+  /**
+   *
+   * @param speed sets the data for the speed of the satellite
+   */
 
   public void setSpeed(double speed) {
     this.speed = speed;
   }
 
-  public double getInclination() {
-    return inclination;
-  }
+  /**
+   *
+   * @param inclination sets the data for the inclination of the satellite
+   */
 
   public void setInclination(double inclination) {
     this.inclination = inclination;
   }
 
-  public double getEccentricity() {
-    return eccentricity;
-  }
-
+  /**
+   *
+   * @param eccentricity sets the data for the eccentricity of the satellite
+   */
   public void setEccentricity(double eccentricity) {
     this.eccentricity = eccentricity;
   }
 
-  public double getApogee() {
-    return apogee;
-  }
+  /**
+   *
+   * @param apogee sets the data for the apogee  position of the satellite
+   */
 
   public void setApogee(int apogee) {
     this.apogee = apogee;
   }
 
-  public double getPerigee() {
-    return perigee;
-  }
+  /**
+   *
+   * @param perigee sets the data for the perigee position of the satellite
+   */
 
   public void setPerigee(int perigee) {
     this.perigee = perigee;
   }
 
-  public String getObjectId() {
-    return objectId;
-  }
+  /**
+   *
+   * @param objectId sets the id of the object
+   */
 
   public void setObjectId(String objectId) {
     this.objectId = objectId;
   }
 
+  /**
+   *
+   * @return returns the id that is generated
+   */
+  public int getId() {
+    return id;
+  }
+
+  /**
+   *
+   * @return returns the norad catalog id
+   */
+  public String getNoradId() {
+    return noradId;
+  }
+
+  /**
+   *
+   * @return reurns the type of object (PAYLOAD, ROCKETBODY, DEBRIS)
+   */
+  public String getObjectType() {
+    return objectType;
+  }
+
+  /**
+   *
+   * @return returns the name of the satellite
+   */
+  public String getSatName() {
+    return satName;
+  }
+
+  /**
+   *
+   * @return returns an organization object which correlates the country with the satellites
+   */
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  /**
+   *
+   * @return returns the orbital period of the satellite
+   */
+
+  public double getOrbitPeriod() {
+    return orbitPeriod;
+  }
+
+  /**
+   *
+   * @return returns the orbital speed of the satellite
+   */
+
+  public double getSpeed() {
+    return speed;
+  }
+
+  /**
+   *
+   * @return returns the inclination of the satellite
+   */
+
+  public double getInclination() {
+    return inclination;
+  }
+
+  /**
+   *
+   * @return returns the eccentricity of the satellite
+   */
+
+  public double getEccentricity() {
+    return eccentricity;
+  }
+
+  /**
+   *
+   * @return returns the apogee position of the satellite
+   */
+
+  public double getApogee() {
+    return apogee;
+  }
+
+  /**
+   *
+   * @return returns the perigee position of the satellite
+   */
+
+
+  public double getPerigee() {
+    return perigee;
+  }
+
+  /**
+   *
+   * @return returns the objects id
+   */
+
+  public String getObjectId() {
+    return objectId;
+  }
+
+
+  /**
+   *
+   * @return returns the satellite name
+   */
   @Override
   public String toString() {
     return getSatName();

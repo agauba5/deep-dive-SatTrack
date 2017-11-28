@@ -27,38 +27,77 @@ public class SatLog {
   private Satellite satellite;
 
 
-  public int getLogNumber() {
-    return logNumber;
-  }
-
-  public Timestamp getCreated() {
-    return created;
-  }
-
-
-  public Date getDate() {
-    return date;
-  }
-
+  /**
+   *
+   * @param date sets the date the user inputs for the day the object was observed
+   */
   public void setDate(Date date) {
     this.date = date;
   }
 
-  public String getNotes() {
-    return notes;
-  }
+  /**
+   *
+   * @param notes sets the users inputted notes
+   */
 
   public void setNotes(String notes) {
     this.notes = notes;
   }
 
-  public Satellite getSatellite() {
-    return satellite;
-  }
+  /**
+   *
+   * @param satellite sets the satellite object to correlate with the satellites entity
+   */
 
   public void setSatellite(Satellite satellite) {
     this.satellite = satellite;
   }
+
+  /**
+   *
+   * @return returns the log number for the specific object
+   */
+
+  public int getLogNumber() {
+    return logNumber;
+  }
+
+  /**
+   *
+   * @return returns the time stamp of the note creation
+   */
+
+  public Timestamp getCreated() {
+    return created;
+  }
+
+  /**
+   *
+   * @return returns the date the user inputted as the date the object was observed
+   */
+
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   *
+   * @return returns the notes input by the user
+   */
+
+  public String getNotes() {
+    return notes;
+  }
+
+  /**
+   *
+   * @return returns the satellite object
+   */
+
+  public Satellite getSatellite() {
+    return satellite;
+  }
+
 
   @Override
   public String toString() {

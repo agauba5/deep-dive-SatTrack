@@ -8,14 +8,30 @@ import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import java.util.Calendar;
 
+/**
+ * creates the date picker dialog fragment for the user selection of the date observed
+ */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
   private Callback callback = null;
 
+  public DatePickerFragment(){
+    // empty constructor
+  }
+
+  /**
+   *
+   * @param callback sets the callback object in the context
+   */
   public DatePickerFragment(Callback callback) {
     this.callback = callback;
   }
 
+  /**
+   * uses the saved instance to output the current calender information
+   * @param savedInstanceState  contains the current date
+   * @return returns the date picker dialog fragment with the date
+   */
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     //use the current date as the default date
     final Calendar c = Calendar.getInstance();
@@ -45,6 +61,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
   }
 
+  /**
+   * interface used to return the user selected calender information
+   */
   public interface Callback {
     void setResult(Calendar calendar);
   }

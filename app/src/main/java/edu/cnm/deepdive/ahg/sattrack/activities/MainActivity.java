@@ -13,16 +13,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import edu.cnm.deepdive.ahg.sattrack.R;
 import edu.cnm.deepdive.ahg.sattrack.fragments.DisplaySatFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.HomeFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.MainSearchFragment;
+import edu.cnm.deepdive.ahg.sattrack.fragments.NotesDialogFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.ParameterSearchFragment;
 import edu.cnm.deepdive.ahg.sattrack.fragments.ResultsFragment;
 import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper;
 
+/**
+ *  The main activity controls the functionality of the fragment in this application
+ */
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     HomeFragment.OnFragmentInteractionListener, OrmHelper.OrmInteraction {
@@ -144,6 +147,7 @@ public class MainActivity extends AppCompatActivity
     super.onStop();
   }
 
+
   @Override
   public synchronized OrmHelper getHelper() {
     if (helper == null) {
@@ -159,7 +163,10 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
-
+  /**
+   * This method Loads the results fragment with the selected search information
+   * @param args a bundle of information that is sent to load the search results
+   */
   public void loadResultsFragment(Bundle args) {
     Fragment fragment = new ResultsFragment();
     fragment.setArguments(args);
@@ -168,6 +175,10 @@ public class MainActivity extends AppCompatActivity
     ft.commit();
   }
 
+  /**
+   * This method Loads the satellite display fragment with the selected search information
+   * @param id the id that correlates with the selected satellite
+   */
   public void loadSatFragment(int id) {
     Fragment fragment = new DisplaySatFragment();
     Bundle args = new Bundle();
@@ -178,6 +189,10 @@ public class MainActivity extends AppCompatActivity
     ft.commit();
   }
 
+  /**
+   * This method Loads the main search fragment
+   * @param view uses a view input to replace the home fragment
+   */
   public void loadMainSearch(View view) {
     Fragment fragment = new MainSearchFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -185,10 +200,15 @@ public class MainActivity extends AppCompatActivity
     ft.commit();
   }
 
+  /**
+   * This method Loads the parameter search fragment
+   * @param view uses a view input to replace the home fragment
+   */
   public void loadParameterSearch(View view) {
     Fragment fragment = new ParameterSearchFragment();
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.content_main, fragment);
     ft.commit();
   }
+
 }

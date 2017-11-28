@@ -8,20 +8,27 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import com.j256.ormlite.dao.Dao;
 import edu.cnm.deepdive.ahg.sattrack.R;
+import edu.cnm.deepdive.ahg.sattrack.activities.MainActivity;
 import edu.cnm.deepdive.ahg.sattrack.entities.Satellite;
 import edu.cnm.deepdive.ahg.sattrack.helpers.OrmHelper.OrmInteraction;
 import java.sql.SQLException;
 
 
 /**
- * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
- * fragment.
+ *
+ * fragment that contains the information of the user selected satellite
  */
-public class DisplaySatFragment extends Fragment implements View.OnClickListener {
+public class DisplaySatFragment extends Fragment implements OnClickListener {
 
+  /**
+   * key to connect the selected satellites id
+   */
   public static final String SAT_ID_KEY = "sat_id";
 
   private View rootView;
@@ -61,18 +68,26 @@ public class DisplaySatFragment extends Fragment implements View.OnClickListener
     trackBtn = rootView.findViewById(R.id.track_button);
 
     notesBtn.setOnClickListener(this);
-    favoritesBtn.setOnClickListener(this);
-    trackBtn.setOnClickListener(this);
+    favoritesBtn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // TODO add favorites list
+      }
+    });
+    trackBtn.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // TODO add to tracked list
+      }
+    });
     // TODO set values of any widgets
     return rootView;
   }
+
 
   @Override
   public void onClick(View view) {
     DialogFragment fragment = new NotesDialogFragment();
     fragment.show(getFragmentManager(), fragment.getClass().getSimpleName());
-
   }
-
-
 }

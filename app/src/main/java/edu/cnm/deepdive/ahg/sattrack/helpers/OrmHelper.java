@@ -26,6 +26,10 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * the OrmHelper class creates and populates a SQLite database containing Organization,
+ * satellite and satellite log entities
+ */
 public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
   private static final String DATABASE_NAME = "satellites.db";
@@ -38,6 +42,10 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
   private Dao<SatLog, Integer> satLogDao = null;
   private Context context;
 
+  /**
+   * updates the database name and database version
+   * @param context
+   */
   public OrmHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
@@ -91,8 +99,6 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
   }
 
   private void populateDatabase() throws SQLException {
-    // TODO add for loop to populate dropdown spinner for country filter
-
     Organization organization = null;
     Satellite satellite = null;
     Calendar calendar;
@@ -156,8 +162,7 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
       throw new RuntimeException(e);
     }
 
-
-
+    
     calendar = Calendar.getInstance();
     satLog = new SatLog();
     calendar.set(2017,11,10);
@@ -168,7 +173,7 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
 
 
   }
-
+  /** interface to be used to get the orm helper in the other classes that use the database */
   public interface OrmInteraction {
 
     OrmHelper getHelper();

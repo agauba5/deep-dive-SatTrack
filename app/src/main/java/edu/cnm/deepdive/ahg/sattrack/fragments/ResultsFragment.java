@@ -21,26 +21,38 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items. <p /> Activities containing this fragment MUST
- * implement
+ *
+ * Set the displayed output once a search has been performed as well as containing the list of
+ * favorite and tracked satellites
  */
 public class ResultsFragment extends Fragment {
 
+  /** Key to distinguish the type of search that was performed */
   public static final String SEARCH_TYPE_KEY = "search_type";
+  /** Key to connect the organization id */
   public static final String ORG_ID_KEY = "org_id";
+  /** Key to connect the pbject type */
   public static final String OBJECT_TYPE_KEY = "object_type";
 
+  /** Key to connect the speed of the object */
   public static final String SPEED_KEY = "speed";
+  /** Key to connect the period of the object*/
   public static final String PERIOD_KEY = "period";
+  /** Key to connect the apogee position of the object*/
   public static final String APOGEE_KEY = "apogee";
+  /** Key to connect the perigee position of the object*/
   public static final String PERIGEE_KEY = "perigee";
+  /** Key to connect the inclination of the object*/
   public static final String INCLINATION_KEY = "inclination";
+  /** Key to connect the eccentricity of the object*/
   public static final String ECCENTRICITY_KEY = "eccentricity";
 
   private static final double searchUpperBound = 1.05;
   private static final double searchLowerBound = .95;
 
+  /**Assigns a integer value to the primary search key to be used in a switch statement*/
   public static final int PRIMARY_SEARCH = 0;
+  /**Assigns a integer value to the parameter search key to be used in a switch statement*/
   public static final int PARAMETER_SEARCH = 1;
 
   private ListView searchResults;
@@ -143,26 +155,6 @@ public class ResultsFragment extends Fragment {
         ((MainActivity) getActivity()).loadSatFragment(item.getId());
       }
     });
-  }
-
-
-  private List<String> searchResultsFilter(List<String> types, List<String[]> sats) {
-
-    for (String[] row : sats) {
-      // TODO add filter to reduce list of sat's by country and object type
-      // TODO if()
-      types.add(row[0]);
-    }
-    return types;
-  }
-
-  private List<String> parmaeterSearchResultsFilter(List<String> types, List<String[]> sats) {
-    // TODO add filter to reduce list of sat's by parameters searched
-    for (String[] row : sats) {
-      // TODO add filter
-      types.add(row[0]);
-    }
-    return types;
   }
 
 }

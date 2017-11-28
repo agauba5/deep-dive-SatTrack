@@ -15,7 +15,10 @@ import edu.cnm.deepdive.ahg.sattrack.activities.MainActivity;
 import edu.cnm.deepdive.ahg.sattrack.entities.Satellite;
 
 /**
- * A simple {@link Fragment} subclass.
+ *
+ * fragment that implements the parameter search , The class includes letting the user
+ * search by the speed, period, apogee, perigee, inclination and eccentricity information of the
+ * satellites
  */
 public class ParameterSearchFragment extends Fragment {
 

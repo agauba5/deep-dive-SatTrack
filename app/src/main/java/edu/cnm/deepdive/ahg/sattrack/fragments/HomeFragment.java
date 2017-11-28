@@ -14,9 +14,9 @@ import edu.cnm.deepdive.ahg.sattrack.activities.MainActivity;
 
 
 /**
- * A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface to handle interaction events. Use
- * the {@link HomeFragment#newInstance} factory method to create an instance of this fragment.
+ *
+ * this is the initial fragment that is seen by the user containing the option to load either
+ * the main or parameter search
  */
 public class HomeFragment extends Fragment {
   private Button mainSearchBtn;
@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
   }
 
 
-  public static HomeFragment newInstance(String param1, String param2) {
+  public static HomeFragment newInstance(View view) {
     HomeFragment fragment = new HomeFragment();
     Bundle args = new Bundle();
     fragment.setArguments(args);
@@ -69,8 +69,6 @@ public class HomeFragment extends Fragment {
 
     return root;
   }
-
-  // TODO: Rename method, update argument and hook method into UI event
   public void onButtonPressed(Uri uri) {
     if (mListener != null) {
       mListener.onFragmentInteraction(uri);

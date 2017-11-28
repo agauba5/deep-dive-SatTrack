@@ -19,8 +19,11 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-
-public class NotesDialogFragment extends DialogFragment implements OnClickListener, DatePickerFragment.Callback {
+/**
+ * this fragment contains the ability for the user to make notes with the selected satellite
+ */
+public class NotesDialogFragment extends DialogFragment implements OnClickListener,
+                                                                   DatePickerFragment.Callback {
 
   public static final String DATE_FIELD_KEY = "date_observed";
   private OrmHelper helper = null;
@@ -58,10 +61,13 @@ public class NotesDialogFragment extends DialogFragment implements OnClickListen
     return notesLog;
   }
 
+  /**
+   *  creates the dialog fragment that contains the save and cancel button
+   * @param savedInstanceState
+   * @return returns  the notes dialog fragment
+   */
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    //TODO associate actions with positive and negative buttons, see: https://developer.android.com/reference/android/app/DialogFragment.html#AlertDialog
-//    return super.onCreateDialog(savedInstanceState);
     View layout = inflateView(getActivity().getLayoutInflater());
     return new AlertDialog.Builder(getActivity()).setView(layout)
                                     .setPositiveButton("Save",
@@ -85,10 +91,8 @@ public class NotesDialogFragment extends DialogFragment implements OnClickListen
 
 
   @Override
-
   public void onStart() {
     super.onStart();
-
   }
 
   @Override

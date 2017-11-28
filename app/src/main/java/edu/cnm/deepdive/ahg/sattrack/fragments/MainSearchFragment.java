@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * fragment that implements the main search, The class includes letting the user
+ * select country and object type to filter search results
  */
 public class MainSearchFragment extends Fragment {
   private AppCompatSpinner country;
@@ -71,6 +72,11 @@ public class MainSearchFragment extends Fragment {
     return root;
   }
 
+  /**
+   * populates the spinner that contains the country information
+   * @param root
+   * @throws SQLException
+   */
   private void setupCountrySpinner(View root) throws SQLException {
     country = root.findViewById(R.id.country);
     Dao<Organization, Integer> orgDao = ((OrmInteraction) getActivity()).getHelper().getOrganizationDao();
@@ -84,6 +90,11 @@ public class MainSearchFragment extends Fragment {
     country.setAdapter(adapter);
   }
 
+  /**
+   * populates the spinner that contains the object type information
+   * @param root
+   * @throws SQLException
+   */
   private void setupObjectTypeSpinner(View root) throws SQLException {
     objectType = root.findViewById(R.id.object_type);
     Dao<Satellite, Integer> satDao = ((OrmInteraction) getActivity()).getHelper().getSatelliteDao();
