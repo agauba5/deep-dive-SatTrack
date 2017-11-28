@@ -57,3 +57,7 @@ Updates to the user interface that would most improve the appeal of the applicat
 *	Use parameters to calculate path of satellite
 *	Use parameters to calculate the angle from user to satellite
 *	Output the angles to an external device
+
+
+### Java docs
+https://agauba5.github.io/deep-dive-SatTrack/docs

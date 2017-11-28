@@ -162,7 +162,7 @@ public class OrmHelper extends OrmLiteSqliteOpenHelper {
       throw new RuntimeException(e);
     }
 
-    
+
     calendar = Calendar.getInstance();
     satLog = new SatLog();
     calendar.set(2017,11,10);
